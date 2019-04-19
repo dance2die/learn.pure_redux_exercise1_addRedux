@@ -22,19 +22,16 @@ function reducer(state = initialState, action) {
 
 const store = createStore(reducer)
 
-class Room extends React.Component {
-  flipLight = () => this.props.dispatch({ type: 'FLIP_LIGHT' })
-
-  render() {
-    const lightedness = this.props.isLightOn ? 'lit' : 'dark'
-    return (
-      <div className={`room ${lightedness}`}>
-        the room is {lightedness}
-        <br />
-        <button onClick={this.flipLight}>flip</button>
-      </div>
-    )
-  }
+function Room({ dispatch, isLightOn }) {
+  const flipLight = () => dispatch({ type: 'FLIP_LIGHT' })
+  const lightedness = isLightOn ? 'lit' : 'dark'
+  return (
+    <div className={`room ${lightedness}`}>
+      the room is {lightedness}
+      <br />
+      <button onClick={flipLight}>flip</button>
+    </div>
+  )
 }
 
 function mapStateToProps(state) {
